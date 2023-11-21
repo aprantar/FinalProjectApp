@@ -39,6 +39,12 @@ class MyApp extends StatelessWidget {
 class HomeActivity extends StatelessWidget {
   const HomeActivity({Key? key}) : super(key: key);
 
+  MySnackBar(message,context){
+    return ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message))
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -76,6 +82,25 @@ class HomeActivity extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: 2,
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home),label: "HOME"),
+            BottomNavigationBarItem(icon: Icon(Icons.message),label: 'Contact'),
+            BottomNavigationBarItem(icon: Icon(Icons.man),label: 'Profile')
+          ],
+          onTap: (int index){
+            if(index==0){
+              MySnackBar('This is Home bottom tab', context);
+            }
+            else if(index==1){
+              MySnackBar('This is contact bottom tab', context);
+            }
+            else if(index==2){
+              MySnackBar('This is profile bottom tab', context);
+            }
+          },
         ),
         drawer: Drawer(
           child: Container(
